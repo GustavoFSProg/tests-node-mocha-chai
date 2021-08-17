@@ -71,8 +71,8 @@ describe('/POST user', function () {
   describe('/DELETE/:id User', function () {
     it('Should delete a user by id', function (done) {
       var user = new usersModel({
-        name: 'Mariana Streb',
-        email: 'mari@gmail.com',
+        name: 'Ana Streb',
+        email: 'ana@gmail.com',
         password: 'gegerrtt',
       })
 
