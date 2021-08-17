@@ -66,9 +66,9 @@ async function deleteOne(req, res) {
   try {
     await usersModel.findByIdAndDelete(req.params.id)
 
-    return res.status(201).send({ msg: 'Tudo apagado!!' })
+    return res.status(200).send({ msg: 'User excluído com Sucesso!' })
   } catch (error) {
-    return res.status(400).send({ msg: 'ERRO, Tudo cagado!!!' })
+    return res.status(400).send({ msg: 'ERRO: Tudo cagado!!' })
   }
 }
 

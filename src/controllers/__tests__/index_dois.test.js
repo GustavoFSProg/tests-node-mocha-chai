@@ -59,28 +59,52 @@ describe('/POST user', function () {
       })
   })
 
-  describe('/GET/:id livro', function () {
+  describe('/GET/:id User', function () {
     it('Shoud return a User from Id', function () {
-      var user = {
-        id: 1,
+      var user = new usersModel({
         name: 'Mariana Streb',
         email: 'mari@gmail.com',
         password: 'gegerrtt',
-      }
+      })
 
       chai
         .request(app)
-        .get(`/user/611bbb783f5a022309b406f8`)
+        .get(`/user/${user._id}`)
         .send(user)
         .end(function (error, res) {
           res.should.be.a('object')
           res.should.have.status(201)
-
-          res.body.should.have.property('name')
-          res.body.should.have.property('email')
-          // res.body.should.have.property('_id').eql(livro.id)
-          done()
         })
     })
   })
+
+  describe('/DELETE/:id User', function () {
+    it('Should delete a user by id', function (done) {
+      var user = new usersModel({
+        name: 'Mariana Streb',
+        email: 'mari@gmail.com',
+        password: 'gegerrtt',
+      })
+      user.save(function (error, livro) {
+        chai
+          .request(app)
+          .get(`/user/${user._id}`)
+          .send(user)
+          .end(function (error, res) {
+            res.should.be.a('object')
+            res.should.have.status(201)
+            chai
+              .request(app)
+              .delete(`/delete/${user._id}`)
+              .end(function (error, res) {
+                res.should.have.status(200)
+
+                res.body.should.be.a('object')
+                done()
+              })
+          })
+      })
+    })
+  })
 })
+//   .eql('Livro excluído com Sucesso!')
