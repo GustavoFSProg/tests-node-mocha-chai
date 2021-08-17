@@ -7,6 +7,7 @@ const route = new Router()
 route.post('/register', UserController.register)
 route.get('/user/:id', UserController.getById)
 route.get('/', UserController.getAll)
+route.put('/update/:id', UserController.updateOne)
 route.delete('/delete/:id', UserController.deleteOne)
 
 export default route

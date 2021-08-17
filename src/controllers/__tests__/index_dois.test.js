@@ -1,16 +1,6 @@
-/*
- * Arquivo: routes/livro.js
- * Author: Glaucia Lemos
- * Description: Arquivo responsável por realizar o TDD com Mocha &amp;amp;amp; Chai no lado do server da nossa app.
- * Data: 21/10/2016
- *
- */
-
 process.env.NODE_ENV = 'test'
 
-var mongoose = require('mongoose')
 import usersModel from '../../models/usersModel'
-import { getAll } from '../../controllers/usersController'
 
 var chai = require('chai')
 var chaiHttp = require('chai-http')
@@ -85,6 +75,7 @@ describe('/POST user', function () {
         email: 'mari@gmail.com',
         password: 'gegerrtt',
       })
+
       user.save(function (error, livro) {
         chai
           .request(app)
@@ -105,6 +96,40 @@ describe('/POST user', function () {
           })
       })
     })
+
+    describe('/UPDATE/:id User', function () {
+      it('Should update a user by id', function (done) {
+        var user = new usersModel({
+          name: 'Marta Streb',
+          email: 'marta@gmail.com',
+          password: 'gegerrtt',
+        })
+        user.save(function (error, livro) {
+          chai
+            .request(app)
+            .get(`/user/${user._id}`)
+            .send(user)
+            .end(function (error, res) {
+              res.should.be.a('object')
+              res.should.have.status(201)
+
+              chai
+                .request(app)
+                .put(`/update/${user._id}`)
+                .send({
+                  name: 'Rafaela editada',
+                  email: 'email-editado@gmail.com',
+                  password: 'senha-editada',
+                })
+                .end(function (error, res) {
+                  res.should.be.a('object')
+                  res.should.have.status(201)
+
+                  done()
+                })
+            })
+        })
+      })
+    })
   })
 })
-//   .eql('Livro excluído com Sucesso!')
