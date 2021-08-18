@@ -31,7 +31,7 @@ async function getAll(req, res) {
   try {
     const data = await productModel.find()
 
-    return res.status(200).send(data)
+    return res.status(200).send({ data })
   } catch (error) {
     return res.status(400).send(error)
   }

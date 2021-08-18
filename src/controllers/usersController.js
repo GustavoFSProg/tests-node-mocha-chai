@@ -46,7 +46,7 @@ async function getAll(req, res) {
   try {
     const data = await usersModel.find()
 
-    return res.status(201).send({ data })
+    return res.status(200).send({ data })
   } catch (error) {
     return res.status(400).send(error)
   }

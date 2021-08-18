@@ -1,13 +1,6 @@
-import Router from 'express'
-import UserController from './controllers/usersController'
+import productsRoutes from './productsRoutes'
+import UserRoute from './userRoute'
 
-const route = new Router()
+const routes = [productsRoutes, UserRoute]
 
-// route.get('/users', UserController.getAllUsers),
-route.post('/register', UserController.register)
-route.get('/user/:id', UserController.getById)
-route.get('/', UserController.getAll)
-route.put('/update/:id', UserController.updateOne)
-route.delete('/delete/:id', UserController.deleteOne)
-
-export default route
+export default routes
