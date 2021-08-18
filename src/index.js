@@ -8,11 +8,14 @@ const app = express()
 
 dotenv.config()
 
-const { PORT, DATABASE_CONNECTION } = process.env
+const { PORT, DATABASE } = process.env
 
-mongoose.connect(
-  'mongodb+srv://gustavo:YbHKOxnXavvhImgh@cluster0.hwew8.mongodb.net/teste-04-08?retryWrites=true&w=majority'
-)
+mongoose.connect(DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+})
 app.use(express.json())
 app.use(cors())
 app.use(routes)
